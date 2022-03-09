@@ -1,0 +1,35 @@
+body {
+background-color: grey;
+}
+.board-container {
+  height: 62vh;
+  width: 62vw;
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  border: 2px solid black;
+  margin: 0 auto;
+}
+.square{
+    border: 2px solid black;
+}
+
+h1{
+    display:flex;
+    justify-content:center;
+}
+#score-container{
+    padding: 2vh;
+    display:grid;
+    grid-template-columns:  45vw 20vw 40vw;
+    grid-template-rows: 10vh 10vh;
+    /* border: 2px solid black;  */
+    margin: 0 auto;
+    
+}
+.score{
+    padding:3vh;
+    border: 2px solid black; 
+    display:grid;
+    justify-self: end;
+}
