@@ -4,7 +4,7 @@
   [x]bomb
   [x]star
   [x]question mark
-  []block
+  [x]block
   []start
   []end
   []character
@@ -26,13 +26,23 @@ character-end, block, bomb, star, and question mark.
   [] use a loop within a loop to create 2d array 
   [] use rows and column logic (take time to figure this out)
   [] */
-  const boardArr =[]
+  //writing hardcoding the array I needed helped me figure out how to create using for loops
+//   let boardArrEx=[
+//                 [0,0][0,1][0,2][0,3][0,4]
+//                 [1,0][1,1][1,2][1,3][1,4]
+//                 [2,0][2,1][2,2][2,3][2,4]
+//                 [3,0][3,1][3,2][3,3][3,4]
+//                 [4,0][4,1][4,2][4,3][4,4]
+// ]
 
-  for(let i = 0; i < 25; i ++){
-      for(let j = 0; j < 25; j ++){
-         boardArr.push[j]
-      }
+let boardArr = []
+
+  for(let i = 0; i < 5; i ++){
+   for(let j = 0; j < 5; j ++){
+      boardArr.push([i,j])
+   }
   }
+  console.log(boardArr)
 //   console.log(boardArr)
 // const allSquares = document.querySelectorAll('.square')
 
