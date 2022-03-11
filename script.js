@@ -1,5 +1,15 @@
 /* 
-[]add reset button
+[x]add reset button
+[]create .pngs for classes
+  [x]bomb
+  [x]star
+  [x]question mark
+  []block
+  []start
+  []end
+  []character
+  []character at start
+  []character at end
 [] create classes with styling for character, character-start, 
 character-end, block, bomb, star, and question mark.
     []character class 
@@ -18,13 +28,13 @@ character-end, block, bomb, star, and question mark.
   [] */
   const boardArr =[]
 
-  for(let i = 0; i = 25; i ++){
-      for(let j = 0; j = 25; j ++){
+  for(let i = 0; i < 25; i ++){
+      for(let j = 0; j < 25; j ++){
          boardArr.push[j]
       }
   }
-  console.log(boardArr)
-const allSquares = document.querySelectorAll('.square')
+//   console.log(boardArr)
+// const allSquares = document.querySelectorAll('.square')
 
 // allSquares.addEventlistener('click',function(){
 //     square.className = "#"

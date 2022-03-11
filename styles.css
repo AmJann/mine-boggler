@@ -1,5 +1,5 @@
 body {
-background-color: grey;
+background-color: #f5f534;
 }
 .board-container {
   height: 62vh;
@@ -32,4 +32,17 @@ h1{
     border: 2px solid black; 
     display:grid;
     justify-self: end;
+}
+.button-container{
+    display:flex;
+    justify-content: center;
+    align-self: center;
+    padding-bottom: 1em;
+}
+#new{
+    background-color: beige;
+    border-radius: 15px;
+    padding:30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
 }
