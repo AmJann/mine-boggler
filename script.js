@@ -62,6 +62,7 @@ let boardArr = []
     char.src = "char.png";
     squareOne.appendChild(char)
     previousCharArr.push(squareOne)}
+    console.log(previousCharArr)
   })
 let executed2 = false;
   let squareTwo = document.querySelector('#two')
@@ -72,15 +73,31 @@ let executed2 = false;
     char.src = "char.png";
     squareTwo.appendChild(char)
     previousCharArr[0].removeChild(previousCharArr[0].firstChild)
-    previousCharArr.unshift()
-    previousCharArr.push(squareTwo)
     previousCharArr[0].style.backgroundColor = 'grey';
-  }
+    previousCharArr.length = 0
+    previousCharArr.push(squareTwo)
     
+  }  
     console.log("click")
+    console.log(previousCharArr)
   })
 
-
+  let executed3 = false;
+  let squareThree = document.querySelector('#three')
+  squareThree.addEventListener("click",function(){
+  if(!executed3){  
+    executed3 = true
+    let char = document.createElement("img")
+    char.src = "char.png";
+    squareThree.appendChild(char)
+    previousCharArr[0].removeChild(previousCharArr[0].firstChild)
+    previousCharArr[0].style.backgroundColor = 'grey';
+    previousCharArr.length = 0;
+    previousCharArr.push(squareThree)
+    
+  }
+  console.log("click")
+})
 
   // let $squares = $('.square')
   // $squares.append('<img src = "block.png">')
