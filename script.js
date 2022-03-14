@@ -52,6 +52,21 @@ let boardArr = []
   //   square.appendChild(char)
   // }
   let previousCharArr = []
+  //new game button/reset
+  const allSquares = document.querySelectorAll('div.square')
+  console.log(allSquares)
+   const newGameButton = document.querySelector('#new')
+   
+  newGameButton.addEventListener("click",function(){
+    allSquares.style.backgroundColor = 'white';
+    allSquares.removeChild(previousCharArr[0].firstChild)
+    let char = document.createElement("img")
+    char.src = "char.png";
+    squareOne.appendChild(char)
+    previousCharArr.length = 0
+    previousCharArr.push(squareOne)
+    console.log("click")
+  })
 
   let executed = false;
   let squareOne = document.querySelector('#one')
@@ -109,6 +124,7 @@ let executed2 = false;
 // allSquares.addEventlistener('click',function(){
 //     square.className = "#"
 // })
-
+  // adds or removes the active class   
+  // cell.classList.toggle("active"); (from stakcoverflow)
 
 

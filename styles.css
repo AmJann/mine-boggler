@@ -1,3 +1,6 @@
+header,h1, #new{
+    font-family: 'Source Sans Pro', sans-serif;
+}
 body {
 background-color: rgb(255, 255, 255);
 }
