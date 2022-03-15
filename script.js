@@ -76,8 +76,10 @@ let boardArr = []
       let index = randomSetting()
       let bombPos = document.querySelector(allDivs[index])
       bombPos.appendChild(bomb)
+      bombPos.classList.add("bomb")
       allDivs.splice(index,1)
       console.log(index)
+      console.log(bombPos)
     
  
       
@@ -100,6 +102,7 @@ let boardArr = []
 
 
   let executed = false;
+  
   let squareOne = document.querySelector('#one')
   squareOne.addEventListener("click",function(){
     if(!executed){
@@ -112,14 +115,19 @@ let boardArr = []
   }
     console.log(previousCharArr)
   })
+
 let executed2 = false;
   let squareTwo = document.querySelector('#two')
   squareTwo.addEventListener("click",function(){
   if(!executed2){  
     executed2 = true
+    if(this.classList.contains("bomb")){
+      this.firstChild.src = "char.png"
+    }else{
     let char = document.createElement("img")
     char.src = "char.png";
     squareTwo.appendChild(char)
+    }
     previousCharArr[0].removeChild(previousCharArr[0].firstChild)
     previousCharArr[0].style.backgroundColor = 'grey';
     previousCharArr.length = 0
@@ -136,16 +144,59 @@ let executed2 = false;
   squareThree.addEventListener("click",function(){
   if(!executed3){  
     executed3 = true
+    if(this.classList.contains("bomb")){
+      this.firstChild.src = "char.png"
+    }else{
     let char = document.createElement("img")
     char.src = "char.png";
     squareThree.appendChild(char)
+    }
     previousCharArr[0].removeChild(previousCharArr[0].firstChild)
     previousCharArr[0].style.backgroundColor = 'grey';
     previousCharArr.length = 0;
     previousCharArr.push(squareThree)
     allPreviousCharArr.push(squareThree)
   }
-  console.log("click")
+})
+
+let executed4 = false;
+let squareFour = document.querySelector('#four')
+squareFour.addEventListener("click",function(){
+if(!executed4){  
+  executed4 = true
+  if(this.classList.contains("bomb")){
+    this.firstChild.src = "char.png"
+  }else{
+  let char = document.createElement("img")
+  char.src = "char.png";
+  squareFour.appendChild(char)
+  }
+  previousCharArr[0].removeChild(previousCharArr[0].firstChild)
+  previousCharArr[0].style.backgroundColor = 'grey';
+  previousCharArr.length = 0;
+  previousCharArr.push(squareFour)
+  allPreviousCharArr.push(squareFour)
+}
+})
+
+let executed5 = false;
+let squareFive = document.querySelector('#five')
+squareFive.addEventListener("click",function(){
+if(!executed5){  
+  executed5 = true
+  if(this.classList.contains("bomb")){
+    this.firstChild.src = "char.png"
+    console.log(squareFive)
+  }else{
+  let char = document.createElement("img")
+  char.src = "char.png";
+  squareFive.appendChild(char)}
+  previousCharArr[0].removeChild(previousCharArr[0].firstChild)
+  previousCharArr[0].style.backgroundColor = 'grey';
+  previousCharArr.length = 0;
+  previousCharArr.push(squareFive)
+  allPreviousCharArr.push(squareFive)
+}
 })
 
 newGameButton.addEventListener("click",function(){
@@ -161,8 +212,11 @@ newGameButton.addEventListener("click",function(){
   previousCharArr.push(squareOne)
   allPreviousCharArr.push(squareOne)
 
-executed2 = false
-executed3 = false
+executed2 = false;
+executed3 = false;
+executed4 = false;
+executed5 = false;
+
   console.log("click")
   console.log(previousCharArr)
 })
