@@ -39,7 +39,10 @@ character-end, block, bomb, star, and question mark.
 // ]
 let charPos = 0;
 let boardArr = []
-
+let currentSpace = 1;
+const allDivs = ['#two','#three','#four', '#five','#six','#seven','#eight','#nine','#ten','#eleven','#twelve','#thriteen','#fourteen','#fifteen','#sixteen','#seventeen','#eighteen','#nineteen','#twenty','#twenty-one','#twenty-two','#twenty-three','#twenty-four']
+const innerDivs = ['#seven','#eight','#nine','#twelve','#thirteen','#fourteen','#seventeen','#eighteen','#nineteen']
+const squareVars = ['squareOne','squareTwo','squareThree','squareFour','squareFive','squareSix','squareSeven', 'squareEight','squareNine','squareTen','squareEleven','squareTwelve','squareThirteen','squareFourteen','squareFifteen','squareSixteen','squareSeventeen','squareEighteen','squareNineteen','squareTwenty','squareTwentyOne','squareTwentyTwo','squareTwentyThree','squareTwentyFour','squareTwentyFive']
   for(let i = 0; i < 5; i ++){
    for(let j = 0; j < 5; j ++){
       boardArr.push([i,j])
@@ -55,7 +58,7 @@ let boardArr = []
   let allPreviousCharArr = []
   //new game button/reset
   const allSquares = document.querySelectorAll('div.square')
-  
+  console.log(allSquares[0].id)
    const newGameButton = document.querySelector('#new')
     
     
@@ -69,8 +72,7 @@ let boardArr = []
       let star = document.createElement("img")
       star.src = "star.png"
 
-      const allDivs = ['#two','#three','#four', '#five','#six','#seven','#eight','#nine','#ten','#eleven','#twelve','#thriteen','#fourteen','#fifteen','#sixteen','#seventeen','#eighteen','#nineteen','#twenty','#twenty-one','#twenty-two','#twenty-three','#twenty-four']
-    const innerDivs = ['#seven','#eight','#nine','#twelve','#thirteen','#fourteen','#seventeen','#eighteen','#nineteen']
+     
 
       let randomSetting = function(){return Math.floor(Math.random() * allDivs.length)}
       let index = randomSetting()
@@ -98,7 +100,22 @@ let boardArr = []
    }
    start()
 
-
+  //  function changeImg(){
+  //   if(this.classList.contains("bomb")){
+  //     this.firstChild.src = "char.png"
+      
+  //   }else{
+  //   let char = document.createElement("img")
+  //   char.src = "char.png";
+  //   this.appendChild(char)}
+  //   previousCharArr[0].removeChild(previousCharArr[0].firstChild)
+  //   previousCharArr[0].style.backgroundColor = 'grey';
+  //   previousCharArr.length = 0;
+  //   previousCharArr.push(this)
+  //   allPreviousCharArr.push(this)
+  //   console.log(previousCharArr)
+  // }
+   
 
 
   let executed = false;
@@ -119,7 +136,8 @@ let boardArr = []
 let executed2 = false;
   let squareTwo = document.querySelector('#two')
   squareTwo.addEventListener("click",function(){
-  if(!executed2){  
+  if(!executed2 && currentSpace === 1 || currentSpace === 3 || currentSpace === 6 || currentSpace === 7 || currentSpace === 8){  
+    currentSpace = 2
     executed2 = true
     if(this.classList.contains("bomb")){
       this.firstChild.src = "char.png"
@@ -134,16 +152,16 @@ let executed2 = false;
     previousCharArr.push(squareTwo)
     allPreviousCharArr.push(squareTwo)
     
-  }  
-    console.log("click")
-    console.log(previousCharArr)
+  }
+
   })
 
   let executed3 = false;
   let squareThree = document.querySelector('#three')
   squareThree.addEventListener("click",function(){
-  if(!executed3){  
+  if(!executed3 && currentSpace === 2 || currentSpace === 4 || currentSpace === 7 || currentSpace === 8 || currentSpace === 9){  
     executed3 = true
+    currentSpace = 3;
     if(this.classList.contains("bomb")){
       this.firstChild.src = "char.png"
     }else{
@@ -157,13 +175,15 @@ let executed2 = false;
     previousCharArr.push(squareThree)
     allPreviousCharArr.push(squareThree)
   }
+
 })
 
 let executed4 = false;
 let squareFour = document.querySelector('#four')
 squareFour.addEventListener("click",function(){
-if(!executed4){  
+if(!executed4 && currentSpace === 3 || currentSpace === 5 || currentSpace === 8 || currentSpace === 9 || currentSpace === 10){  
   executed4 = true
+  currentSpace =4;
   if(this.classList.contains("bomb")){
     this.firstChild.src = "char.png"
   }else{
@@ -177,13 +197,15 @@ if(!executed4){
   previousCharArr.push(squareFour)
   allPreviousCharArr.push(squareFour)
 }
+
 })
 
 let executed5 = false;
 let squareFive = document.querySelector('#five')
 squareFive.addEventListener("click",function(){
-if(!executed5){  
+if(!executed5 && currentSpace === 4 || currentSpace === 9 || currentSpace === 10){  
   executed5 = true
+  currentSpace = 5;
   if(this.classList.contains("bomb")){
     this.firstChild.src = "char.png"
     console.log(squareFive)
@@ -196,6 +218,113 @@ if(!executed5){
   previousCharArr.length = 0;
   previousCharArr.push(squareFive)
   allPreviousCharArr.push(squareFive)
+}
+})
+
+let executed6 = false;
+let squareSix = document.querySelector('#six')
+squareSix.addEventListener("click",function(){
+if(!executed6 && currentSpace === 1 || currentSpace === 2 || currentSpace === 7 || currentSpace === 11 || currentSpace === 12 ){  
+  executed6 = true
+  currentSpace = 6;
+  if(this.classList.contains("bomb")){
+    this.firstChild.src = "char.png"
+  }else{
+  let char = document.createElement("img")
+  char.src = "char.png";
+  squareSix.appendChild(char)}
+  previousCharArr[0].removeChild(previousCharArr[0].firstChild)
+  previousCharArr[0].style.backgroundColor = 'grey';
+  previousCharArr.length = 0;
+  previousCharArr.push(squareSix)
+  allPreviousCharArr.push(squareSix)
+}
+})
+
+let executed7 = false;
+let squareSeven = document.querySelector('#seven')
+squareSeven.addEventListener("click",function(){
+if(!executed7 && currentSpace === 1 || currentSpace === 2 || currentSpace === 3 || currentSpace === 6 || currentSpace === 8 || currentSpace === 11 || currentSpace === 12 || currentSpace === 13 ){  
+  executed7 = true
+  currentSpace = 7;
+  if(this.classList.contains("bomb")){
+    this.firstChild.src = "char.png"
+    
+  }else{
+  let char = document.createElement("img")
+  char.src = "char.png";
+  this.appendChild(char)}
+  previousCharArr[0].removeChild(previousCharArr[0].firstChild)
+  previousCharArr[0].style.backgroundColor = 'grey';
+  previousCharArr.length = 0;
+  previousCharArr.push(this)
+  allPreviousCharArr.push(this)
+  console.log(previousCharArr)
+}
+})
+
+let executed8 = false;
+let squareEight = document.querySelector('#eight')
+squareEight.addEventListener("click",function(){
+if(!executed8 && currentSpace === 2 || currentSpace === 3 || currentSpace === 4 || currentSpace === 7 || currentSpace === 9 || currentSpace === 12 || currentSpace === 13 || currentSpace === 14 ){  
+  executed8 = true
+  currentSpace = 8;
+  if(this.classList.contains("bomb")){
+    this.firstChild.src = "char.png"
+    
+  }else{
+  let char = document.createElement("img")
+  char.src = "char.png";
+  this.appendChild(char)}
+  previousCharArr[0].removeChild(previousCharArr[0].firstChild)
+  previousCharArr[0].style.backgroundColor = 'grey';
+  previousCharArr.length = 0;
+  previousCharArr.push(this)
+  allPreviousCharArr.push(this)
+}
+})
+
+let executed9 = false;
+let squareNine = document.querySelector('#nine')
+squareNine.addEventListener("click",function(){
+if(!executed9 && currentSpace === 3 || currentSpace === 4 || currentSpace === 5 || currentSpace === 8 || currentSpace === 10 || currentSpace === 13 || currentSpace === 14 || currentSpace === 15 ){  
+  executed9 = true
+  currentSpace = 9;
+  if(this.classList.contains("bomb")){
+    this.firstChild.src = "char.png"
+    
+  }else{
+  let char = document.createElement("img")
+  char.src = "char.png";
+  this.appendChild(char)}
+  previousCharArr[0].removeChild(previousCharArr[0].firstChild)
+  previousCharArr[0].style.backgroundColor = 'grey';
+  previousCharArr.length = 0;
+  previousCharArr.push(this)
+  allPreviousCharArr.push(this)
+  console.log(previousCharArr)
+}
+})
+
+let executed10 = false;
+let squareTen = document.querySelector('#ten')
+squareTen.addEventListener("click",function(){
+if(!executed10 && currentSpace === 4 || currentSpace === 5 || currentSpace === 3 || currentSpace === 9 || currentSpace === 14 || currentSpace === 15 ){  
+  executed10 = true
+  currentSpace = 10;
+  if(this.classList.contains("bomb")){
+    this.firstChild.src = "char.png"
+    
+  }else{
+  let char = document.createElement("img")
+  char.src = "char.png";
+  this.appendChild(char)}
+  previousCharArr[0].removeChild(previousCharArr[0].firstChild)
+  previousCharArr[0].style.backgroundColor = 'grey';
+  previousCharArr.length = 0;
+  previousCharArr.push(this)
+  allPreviousCharArr.push(this)
+  console.log(previousCharArr)
 }
 })
 
@@ -216,7 +345,15 @@ executed2 = false;
 executed3 = false;
 executed4 = false;
 executed5 = false;
-
+executed6 = false;
+executed7 = false;
+executed8 = false;
+executed9 = false;
+executed10 = false;
+// for( let i =0; i < allSquares.length; i++){
+//   allSquares.removeChild(squareVars[i].lastElementChild)
+// }
+start()
   console.log("click")
   console.log(previousCharArr)
 })
