@@ -78,38 +78,18 @@ let boardArr = []
       bombPos.appendChild(bomb)
       allDivs.splice(index,1)
       console.log(index)
-
-      // function randomSqaures(){
-      //   const arr = []
-      //   while(allDivs.length < 6){
-      //     let randomNum = Math.floor(Math.random() * allDivs.length) + 1
-      //     if(arr.indexOf(randomNum) === -1){
-      //       arr.push(randomNum)
-      //       if(arr.length <= 2){
-      //         let bombPos = document.querySelector(allDivs[randomNum])
-      //         bombPos.appendChild(bomb)
-      //       }
-      //       if(arr.length <= 4){
-      //             let questionMarkPos = document.querySelector(allDivs[randomNum])
-      //             questionMarkPos.appendChild(questionMark)
-      //       }else{
-      //         let starPos = document.querySelector(allDivs[randomNum])
-      //         starPos.appendChild(star)
-      //       }
-      //     }
-        
-      // return(arr)
-      // }
-      // randomSqaures()
+    
+ 
+      
       
    
 
-      let randomSetting2 = Math.floor(Math.random() * allDivs.length)
-      let bombPos2 = document.querySelector(allDivs[randomSetting2])
-      bombPos2.appendChild(bomb)
-      allDivs.splice(randomSetting2,1)
-      let questionMarkPos = document.querySelector(allDivs[randomSetting2])
-      questionMarkPos.appendChild(questionMark)
+      // let randomSetting2 = Math.floor(Math.random() * allDivs.length)
+      // let bombPos2 = document.querySelector(allDivs[randomSetting2])
+      // bombPos2.appendChild(bomb)
+      // allDivs.splice(randomSetting2,1)
+      // let questionMarkPos = document.querySelector(allDivs[randomSetting2])
+      // questionMarkPos.appendChild(questionMark)
 
       
 
@@ -169,17 +149,20 @@ let executed2 = false;
 })
 
 newGameButton.addEventListener("click",function(){
-  for(let i = 0; i < previousCharArr[0].length; i ++){
-  previousCharArr[i].style.backgroundColor = 'white';
-  console.log(previousCharArr)
+  for(let i = 0; i < allPreviousCharArr.length; i ++){
+  allPreviousCharArr[i].style.backgroundColor = "white";
+  console.log(allPreviousCharArr)
   }
   previousCharArr[0].removeChild(previousCharArr[0].firstChild)
   let char = document.createElement("img")
   char.src = "char.png";
   squareOne.appendChild(char)
-  // previousCharArr.length = 0
+  previousCharArr.length = 0
   previousCharArr.push(squareOne)
   allPreviousCharArr.push(squareOne)
+
+executed2 = false
+executed3 = false
   console.log("click")
   console.log(previousCharArr)
 })
