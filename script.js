@@ -128,18 +128,60 @@ function start() {
   bomb2.src = "boom2.png";
   let questionMark = document.createElement("img");
   questionMark.src = "questionMark.png";
+  let questionMark2 = document.createElement("img");
+  questionMark2.src = "questionMark2.png";
   let star = document.createElement("img");
   star.src = "star.png";
-
+  let star2 = document.createElement("img");
+  star2.src = "star2.png";
   let randomSetting = function () {
     return Math.floor(Math.random() * allDivs.length);
   };
+  function shuffle(array) {
+    var i = array.length,
+        j = 0,
+        temp;
+
+    while (i--) {
+
+        j = Math.floor(Math.random() * (i+1));
+
+        // This is the logic I was missing, I found this function on stack overflow
+        //I already figured I needed a while loop because anything I looked up to generate 
+        //unique random numbers had a while loop(I guess this coud work in a for loop too) and I knew I needed Math.floor and Math.random
+        temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+
+    }
+
+    return array;
+}
+  let shuffled = shuffle(allDivs);
   let index = randomSetting();
-  let bombPos = document.querySelector(allDivs[index]);
+  //add bombs
+  let bombPos = document.querySelector(shuffled[0]);
   bombPos.appendChild(bomb);
   bombPos.classList.add("bomb");
+  let bombPos2 = document.querySelector(shuffled[1]);
+  bombPos2.appendChild(bomb2);
+  bombPos2.classList.add("bomb");
+  //add question marks
+  let questionMarkPos = document.querySelector(shuffled[2]);
+  questionMarkPos.appendChild(questionMark);
+  questionMarkPos.classList.add("questionMark");
+  let questionMarkPos2 = document.querySelector(shuffled[3]);
+  questionMarkPos2.appendChild(questionMark2);
+  questionMarkPos2.classList.add("questionMark");
+  let starPos = document.querySelector(shuffled[4]);
+  starPos.appendChild(star);
+  starPos.classList.add("star");
+  let starPos2 = document.querySelector(shuffled[5]);
+  starPos2.appendChild(star2);
+  starPos2.classList.add("star");
+
   // allDivs.splice(index,1)
-  console.log(index);
+  console.log(shuffled);
   console.log(bombPos);
 
   // let randomSetting2 = Math.floor(Math.random() * allDivs.length)
@@ -152,14 +194,15 @@ function start() {
 start();
 
 function changeImg(element) {
-  if (element.classList.contains("bomb")) {
+  if (element.classList.contains("bomb")|| element.classList.contains("questionMark")||element.classList.contains("star")) {
+    
     element.firstChild.src = "char.png";
   } else {
     let char = document.createElement("img");
     char.src = "char.png";
     element.appendChild(char);
   }
-  previousCharArr[0].removeChild(previousCharArr[0].firstChild);
+  previousCharArr[0].removeChild(previousCharArr[0].lastChild);
   previousCharArr[0].style.backgroundColor = "grey";
   previousCharArr.length = 0;
   previousCharArr.push(element);
@@ -194,7 +237,7 @@ squareTwo.addEventListener("click", function () {
   ) {
     currentSpace = 2;
     executed2 = true;
-   changeImg(this)
+    changeImg(this);
   }
 });
 
@@ -210,7 +253,7 @@ squareThree.addEventListener("click", function () {
   ) {
     executed3 = true;
     currentSpace = 3;
-   changeImg(this)
+    changeImg(this);
   }
 });
 
@@ -226,7 +269,7 @@ squareFour.addEventListener("click", function () {
   ) {
     executed4 = true;
     currentSpace = 4;
-    changeImg(this)
+    changeImg(this);
   }
 });
 
@@ -240,7 +283,7 @@ squareFive.addEventListener("click", function () {
   ) {
     executed5 = true;
     currentSpace = 5;
-    changeImg(this)
+    changeImg(this);
   }
 });
 
@@ -256,7 +299,7 @@ squareSix.addEventListener("click", function () {
   ) {
     executed6 = true;
     currentSpace = 6;
-   changeImg(this)
+    changeImg(this);
   }
 });
 
@@ -275,7 +318,7 @@ squareSeven.addEventListener("click", function () {
   ) {
     executed7 = true;
     currentSpace = 7;
-   changeImg(this)
+    changeImg(this);
   }
 });
 
@@ -294,7 +337,7 @@ squareEight.addEventListener("click", function () {
   ) {
     executed8 = true;
     currentSpace = 8;
-   changeImg(this)
+    changeImg(this);
   }
 });
 
@@ -313,7 +356,7 @@ squareNine.addEventListener("click", function () {
   ) {
     executed9 = true;
     currentSpace = 9;
-   changeImg(this)
+    changeImg(this);
   }
 });
 
@@ -329,7 +372,7 @@ squareTen.addEventListener("click", function () {
   ) {
     executed10 = true;
     currentSpace = 10;
-    changeImg(this)
+    changeImg(this);
   }
 });
 
@@ -345,9 +388,8 @@ squareEleven.addEventListener("click", function () {
   ) {
     executed11 = true;
     currentSpace = 11;
-    
-  changeImg(this)
 
+    changeImg(this);
   }
 });
 // square 12
@@ -366,7 +408,7 @@ squareTwelve.addEventListener("click", function () {
   ) {
     executed12 = true;
     currentSpace = 12;
-    changeImg(this)
+    changeImg(this);
   }
 });
 
@@ -386,7 +428,7 @@ squareThirteen.addEventListener("click", function () {
   ) {
     executed13 = true;
     currentSpace = 13;
-    changeImg(this)
+    changeImg(this);
   }
 });
 
@@ -404,7 +446,7 @@ squareFourteen.addEventListener("click", function () {
     currentSpace === 19 ||
     currentSpace === 20
   ) {
-    changeImg(this)
+    changeImg(this);
   }
 });
 
@@ -421,7 +463,7 @@ squareFifteen.addEventListener("click", function () {
   ) {
     executed15 = true;
     currentSpace = 15;
-    changeImg(this)
+    changeImg(this);
   }
 });
 
@@ -438,7 +480,7 @@ squareSixteen.addEventListener("click", function () {
   ) {
     executed16 = true;
     currentSpace = 16;
-   changeImg(this)
+    changeImg(this);
   }
 });
 
@@ -458,7 +500,7 @@ squareSeventeen.addEventListener("click", function () {
   ) {
     executed17 = true;
     currentSpace = 17;
-    changeImg(this)
+    changeImg(this);
   }
 });
 
@@ -478,7 +520,7 @@ squareEighteen.addEventListener("click", function () {
   ) {
     executed18 = true;
     currentSpace = 18;
-    changeImg(this)
+    changeImg(this);
   }
 });
 
@@ -497,7 +539,7 @@ squareNineteen.addEventListener("click", function () {
   ) {
     executed19 = true;
     currentSpace = 19;
-    changeImg(this)
+    changeImg(this);
   }
 });
 
@@ -513,7 +555,7 @@ squareTwenty.addEventListener("click", function () {
   ) {
     executed20 = true;
     currentSpace = 20;
-    changeImg(this)
+    changeImg(this);
   }
 });
 
@@ -528,7 +570,7 @@ squareTwentyOne.addEventListener("click", function () {
   ) {
     executed21 = true;
     currentSpace = 21;
-    changeImg(this)
+    changeImg(this);
   }
 });
 
@@ -545,7 +587,7 @@ squareTwentyTwo.addEventListener("click", function () {
   ) {
     executed22 = true;
     currentSpace = 22;
-    changeImg(this)
+    changeImg(this);
   }
 });
 
@@ -562,7 +604,7 @@ squareTwentyThree.addEventListener("click", function () {
   ) {
     executed23 = true;
     currentSpace = 23;
-    changeImg(this)
+    changeImg(this);
   }
 });
 
@@ -578,7 +620,7 @@ squareTwentyFour.addEventListener("click", function () {
   ) {
     executed24 = true;
     currentSpace = 24;
-    changeImg(this)
+    changeImg(this);
   }
 });
 
@@ -593,7 +635,7 @@ squareTwentyFive.addEventListener("click", function () {
   ) {
     executed25 = true;
     currentSpace = 25;
-    changeImg(this)
+    changeImg(this);
   }
 });
 
@@ -609,8 +651,6 @@ newGameButton.addEventListener("click", function () {
   previousCharArr.length = 0;
   previousCharArr.push(squareOne);
   allPreviousCharArr.push(squareOne);
-
-
 
   executed2 = false;
   executed3 = false;
@@ -639,17 +679,17 @@ newGameButton.addEventListener("click", function () {
 
   currentSpace = 1;
   start();
-  // for (let i = 0; i <= 25; i++) {
-  //   if (allSquares[i].classList.contains("bomb")) {
-  //     allSquares[i].classList.remove("bomb");
-  //     console.log(allSquares[i].classList)
-  //   }
-  // }
+  for (let i = 0; i < allSquares.length; i++) {
+    if (allSquares[i].classList.contains("bomb")) {
+      allSquares[i].classList.remove("bomb");
+      console.log(allSquares[i].classList)
+    }
+  }
 
   // for( let i =0; i < allSquares.length; i++){
   //   allSquares.removeChild(squareVars[i].lastElementChild)
   // }
-  
+
   console.log("click");
   console.log(previousCharArr);
 });
