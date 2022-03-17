@@ -37,10 +37,13 @@ character-end, block, bomb, star, and question mark.
 //                 [3,0][3,1][3,2][3,3][3,4]
 //                 [4,0][4,1][4,2][4,3][4,4]
 // ]
+let score = 0;
 let charPos = 0;
 let boardArr = [];
 let currentSpace = 1;
-const allDivs = [
+let previousCharArr = [];
+let allPreviousCharArr = [];
+let allDivs = [
   "#two",
   "#three",
   "#four",
@@ -52,7 +55,7 @@ const allDivs = [
   "#ten",
   "#eleven",
   "#twelve",
-  "#thriteen",
+  "#thirteen",
   "#fourteen",
   "#fifteen",
   "#sixteen",
@@ -97,11 +100,11 @@ const squareVars = [
   "squareEighteen",
   "squareNineteen",
   "squareTwenty",
-  "squareTwenty-one",
-  "squareTwenty-two",
-  "squareTwenty-three",
-  "squareTwenty-four",
-  "squareTwenty-five",
+  // "squareTwenty-one",
+  // "squareTwenty-two",
+  // "squareTwenty-three",
+  // "squareTwenty-four",
+  // "squareTwenty-five",
 ];
 for (let i = 0; i < 5; i++) {
   for (let j = 0; j < 5; j++) {
@@ -114,14 +117,36 @@ console.log(boardArr);
 //   char.src = "char.png";
 //   square.appendChild(char)
 // }
-let previousCharArr = [];
-let allPreviousCharArr = [];
-//new game button/reset
-const allSquares = document.querySelectorAll(".square");
-console.log(allSquares[0].id);
-const newGameButton = document.querySelector("#new");
 
+const allSquares = document.querySelectorAll(".square");
+let squareOne = document.querySelector("#one");
+function shuffle(array) {
+  var i = array.length,
+    j = 0,
+    temp;
+
+  while (i--) {
+    j = Math.floor(Math.random() * (i + 1));
+
+    // This is the logic I was missing, I found this function on stack overflow
+    //I already figured I needed a while loop because anything I looked up to generate
+    //unique random numbers had a while loop(I guess this coud work in a for loop too) and I knew I needed Math.floor and Math.random
+    temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array;
+}
+//new game button/reset
+const newGameButton = document.querySelector("#new");
 function start() {
+  let char = document.createElement("img");
+  char.src = "char.png";
+  squareOne.appendChild(char);
+  previousCharArr.length = 0;
+  previousCharArr.push(squareOne);
+  allPreviousCharArr.push(squareOne);
+
   let bomb = document.createElement("img");
   bomb.src = "boom.png";
   let bomb2 = document.createElement("img");
@@ -134,31 +159,48 @@ function start() {
   star.src = "star.png";
   let star2 = document.createElement("img");
   star2.src = "star2.png";
-  let randomSetting = function () {
-    return Math.floor(Math.random() * allDivs.length);
-  };
-  function shuffle(array) {
-    var i = array.length,
-        j = 0,
-        temp;
+  let block = document.createElement("img");
+  block.src = "block.png";
+  let block2 = document.createElement("img");
+  block2.src = "block2.png";
+  let block3 = document.createElement("img");
+  block3.src = "block3.png";
+  let block4 = document.createElement("img");
+  block4.src = "block4.png";
 
-    while (i--) {
+  //blocks placement
+  let blockShuffle = shuffle(innerDivs);
+  console.log(blockShuffle);
+  let blockPos = document.querySelector(blockShuffle[0]);
+  blockPos.appendChild(block);
+  allDivs = allDivs.filter(
+    (div) =>
+      div !== blockShuffle[0] &&
+      div !== blockShuffle[1] &&
+      div !== blockShuffle[2] &&
+      div !== blockShuffle[3]
+  );
+  blockPos.classList.add("block");
 
-        j = Math.floor(Math.random() * (i+1));
+  let blockPos2 = document.querySelector(blockShuffle[1]);
+  blockPos2.appendChild(block2);
+  blockPos2.classList.add("block");
 
-        // This is the logic I was missing, I found this function on stack overflow
-        //I already figured I needed a while loop because anything I looked up to generate 
-        //unique random numbers had a while loop(I guess this coud work in a for loop too) and I knew I needed Math.floor and Math.random
-        temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+  let blockPos3 = document.querySelector(blockShuffle[2]);
+  blockPos3.appendChild(block3);
+  blockPos3.classList.add("block");
 
-    }
+  let blockPos4 = document.querySelector(blockShuffle[3]);
+  blockPos4.appendChild(block4);
+  blockPos4.classList.add("block");
+  console.log(blockPos4);
+  console.log(blockShuffle[3]);
+  console.log(allDivs);
 
-    return array;
-}
+  //shuffle for bombs, stars, and question marks
   let shuffled = shuffle(allDivs);
-  let index = randomSetting();
+  console.log(shuffled);
+
   //add bombs
   let bombPos = document.querySelector(shuffled[0]);
   bombPos.appendChild(bomb);
@@ -166,6 +208,7 @@ function start() {
   let bombPos2 = document.querySelector(shuffled[1]);
   bombPos2.appendChild(bomb2);
   bombPos2.classList.add("bomb");
+
   //add question marks
   let questionMarkPos = document.querySelector(shuffled[2]);
   questionMarkPos.appendChild(questionMark);
@@ -173,57 +216,85 @@ function start() {
   let questionMarkPos2 = document.querySelector(shuffled[3]);
   questionMarkPos2.appendChild(questionMark2);
   questionMarkPos2.classList.add("questionMark");
+
+  //add stars
   let starPos = document.querySelector(shuffled[4]);
   starPos.appendChild(star);
   starPos.classList.add("star");
   let starPos2 = document.querySelector(shuffled[5]);
   starPos2.appendChild(star2);
   starPos2.classList.add("star");
-
-  // allDivs.splice(index,1)
-  console.log(shuffled);
-  console.log(bombPos);
-
-  // let randomSetting2 = Math.floor(Math.random() * allDivs.length)
-  // let bombPos2 = document.querySelector(allDivs[randomSetting2])
-  // bombPos2.appendChild(bomb)
-  // allDivs.splice(randomSetting2,1)
-  // let questionMarkPos = document.querySelector(allDivs[randomSetting2])
-  // questionMarkPos.appendChild(questionMark)
 }
 start();
 
+let scoreBoard = document.querySelector("#scoreBoard");
+let questionMarkScore = [
+  {
+    scoreChange: -500,
+    message:
+      "You tripped and scraped your knee moving between squares you lose 500 points.",
+  },
+  { scoreChange: 1000, message: "You found 1000 points on the ground!" },
+  {
+    scoreChange: -1000,
+    message: "dog bites your score, takes a whopping chunk of 1000 points.",
+  },
+  {
+    scoreChange: 500,
+    message:
+      "You give an old lady directions to the last square, she rewards you with 500 points for your kindness!",
+  },
+  {
+    scoreChange: 200,
+    message:
+      "You were too busy clicking squares and forgot to buy lunch, oops! Money saved is money earned, you gained 200 points.",
+  },
+  {
+    scoreChange: 200,
+    message:
+      "You were caught speeding through squares, cop pulls you over and gives you a 200 point ticket. you lose 200 points.",
+  },
+];
+
+let char = document.createElement("img");
 function changeImg(element) {
-  if (element.classList.contains("bomb")|| element.classList.contains("questionMark")||element.classList.contains("star")) {
-    
+  if (
+    element.classList.contains("bomb") ||
+    element.classList.contains("questionMark") ||
+    element.classList.contains("star")
+  ) {
+    let char = document.createElement("img");
     element.firstChild.src = "char.png";
+    char.classList.add("char");
   } else {
     let char = document.createElement("img");
     char.src = "char.png";
     element.appendChild(char);
+    char.classList.add("char");
   }
+
   previousCharArr[0].removeChild(previousCharArr[0].lastChild);
   previousCharArr[0].style.backgroundColor = "grey";
   previousCharArr.length = 0;
   previousCharArr.push(element);
   allPreviousCharArr.push(element);
   console.log(previousCharArr);
-}
 
-let executed = false;
-
-let squareOne = document.querySelector("#one");
-squareOne.addEventListener("click", function () {
-  if (!executed) {
-    executed = true;
-    let char = document.createElement("img");
-    char.src = "char.png";
-    squareOne.appendChild(char);
-    previousCharArr.push(squareOne);
-    allPreviousCharArr.push(squareOne);
+  if (element.classList.contains("bomb")) {
+    score -= 500;
+    scoreBoard.innerHTML = `Score: ${score}`;
+  } else if (element.classList.contains("questionMark")) {
+    let randomQuestionIndex = shuffle(questionMarkScore);
+    score = score + randomQuestionIndex[0].scoreChange;
+    alert(randomQuestionIndex[0].message);
+    scoreBoard.innerHTML = `Score: ${score}`;
+  } else if (element.classList.contains("star")) {
+    score += 500;
+  } else {
+    score += 200;
+    scoreBoard.innerHTML = `Score: ${score}`;
   }
-  console.log(previousCharArr);
-});
+}
 
 let executed2 = false;
 let squareTwo = document.querySelector("#two");
@@ -307,7 +378,7 @@ let executed7 = false;
 let squareSeven = document.querySelector("#seven");
 squareSeven.addEventListener("click", function () {
   if (
-    (!executed7 && currentSpace === 1) ||
+    (!executed7 && !this.classList.contains("block") && currentSpace === 1) ||
     currentSpace === 2 ||
     currentSpace === 3 ||
     currentSpace === 6 ||
@@ -326,7 +397,7 @@ let executed8 = false;
 let squareEight = document.querySelector("#eight");
 squareEight.addEventListener("click", function () {
   if (
-    (!executed8 && currentSpace === 2) ||
+    (!executed8 && !this.classList.contains("block") && currentSpace === 2) ||
     currentSpace === 3 ||
     currentSpace === 4 ||
     currentSpace === 7 ||
@@ -345,7 +416,7 @@ let executed9 = false;
 let squareNine = document.querySelector("#nine");
 squareNine.addEventListener("click", function () {
   if (
-    (!executed9 && currentSpace === 3) ||
+    (!executed9 && !this.classList.contains("block") && currentSpace === 3) ||
     currentSpace === 4 ||
     currentSpace === 5 ||
     currentSpace === 8 ||
@@ -397,7 +468,7 @@ let executed12 = false;
 let squareTwelve = document.querySelector("#twelve");
 squareTwelve.addEventListener("click", function () {
   if (
-    (!executed12 && currentSpace === 6) ||
+    (!executed12 && !this.classList.contains("block") && currentSpace === 6) ||
     currentSpace === 7 ||
     currentSpace === 8 ||
     currentSpace === 11 ||
@@ -417,7 +488,7 @@ let executed13 = false;
 let squareThirteen = document.querySelector("#thirteen");
 squareThirteen.addEventListener("click", function () {
   if (
-    (!executed13 && currentSpace === 7) ||
+    (!executed13 && !this.classList.contains("block") && currentSpace === 7) ||
     currentSpace === 8 ||
     currentSpace === 9 ||
     currentSpace === 12 ||
@@ -437,7 +508,7 @@ let executed14 = false;
 let squareFourteen = document.querySelector("#fourteen");
 squareFourteen.addEventListener("click", function () {
   if (
-    (!executed14 && currentSpace === 8) ||
+    (!executed14 && !this.classList.contains("block") && currentSpace === 14) ||
     currentSpace === 9 ||
     currentSpace === 10 ||
     currentSpace === 13 ||
@@ -446,6 +517,8 @@ squareFourteen.addEventListener("click", function () {
     currentSpace === 19 ||
     currentSpace === 20
   ) {
+    executed14 = true;
+    currentSpace = 14;
     changeImg(this);
   }
 });
@@ -465,6 +538,7 @@ squareFifteen.addEventListener("click", function () {
     currentSpace = 15;
     changeImg(this);
   }
+  console.log("click");
 });
 
 //Square 16
@@ -489,7 +563,7 @@ let executed17 = false;
 let squareSeventeen = document.querySelector("#seventeen");
 squareSeventeen.addEventListener("click", function () {
   if (
-    (!executed17 && currentSpace === 11) ||
+    (!executed17 && !this.classList.contains("block") && currentSpace === 11) ||
     currentSpace === 12 ||
     currentSpace === 13 ||
     currentSpace === 16 ||
@@ -509,7 +583,7 @@ let executed18 = false;
 let squareEighteen = document.querySelector("#eighteen");
 squareEighteen.addEventListener("click", function () {
   if (
-    (!executed18 && currentSpace === 12) ||
+    (!executed18 && !this.classList.contains("block") && currentSpace === 12) ||
     currentSpace === 13 ||
     currentSpace === 14 ||
     currentSpace === 17 ||
@@ -529,7 +603,7 @@ let executed19 = false;
 let squareNineteen = document.querySelector("#nineteen");
 squareNineteen.addEventListener("click", function () {
   if (
-    (!executed19 && currentSpace === 13) ||
+    (!executed19 && !this.classList.contains("block") && currentSpace === 13) ||
     currentSpace === 14 ||
     currentSpace === 15 ||
     currentSpace === 18 ||
@@ -541,6 +615,7 @@ squareNineteen.addEventListener("click", function () {
     currentSpace = 19;
     changeImg(this);
   }
+  console.log("click");
 });
 
 //Square 20
@@ -636,6 +711,7 @@ squareTwentyFive.addEventListener("click", function () {
     executed25 = true;
     currentSpace = 25;
     changeImg(this);
+    console.log(previousCharArr);
   }
 });
 
@@ -644,13 +720,39 @@ newGameButton.addEventListener("click", function () {
   for (let i = 0; i < allPreviousCharArr.length; i++) {
     allPreviousCharArr[i].style.backgroundColor = "white";
   }
+  for (let i = 0; i < allPreviousCharArr.length; i++) {
+    if (!squareOne) {
+      allPreviousCharArr[i].removeChild(allPreviousCharArr[i].lastChild);
+    }
+  }
   previousCharArr[0].removeChild(previousCharArr[0].lastChild);
-  let char = document.createElement("img");
-  char.src = "char.png";
-  squareOne.appendChild(char);
-  previousCharArr.length = 0;
-  previousCharArr.push(squareOne);
-  allPreviousCharArr.push(squareOne);
+
+  // for(let i = 0; i < allSquares.length; i++){
+  //   if (allSquares[i].classList.contains("bomb")||allSquares[i].classList.contains("star")||allSquares[i].classList.contains("questionMark")){
+  //   allSquares[i].removeChild(allSquares[i].lastChild)
+  //   }
+  // }
+
+  for (let i = 0; i < allSquares.length; i++) {
+    if (
+      allSquares[i].classList.contains("bomb") ||
+      allSquares[i].classList.contains("star") ||
+      allSquares[i].classList.contains(
+        "questionMark" || allSquares[i].classList.contains("char") || allSquares[i].classList.contains("block")
+      )
+    ) {
+      allSquares[i].classList.remove("bomb");
+      allSquares[i].classList.remove("star");
+      allSquares[i].classList.remove("questionMark");
+      allSquares[i].classList.remove("char");
+      allSquares[i].classList.remove("block");
+
+      console.log(allSquares[i].classList);
+    }
+  }
+
+  score = 0;
+  scoreBoard.innerHTML = `Score: ${score}`;
 
   executed2 = false;
   executed3 = false;
@@ -678,14 +780,8 @@ newGameButton.addEventListener("click", function () {
   executed25 = false;
 
   currentSpace = 1;
-  start();
-  for (let i = 0; i < allSquares.length; i++) {
-    if (allSquares[i].classList.contains("bomb")) {
-      allSquares[i].classList.remove("bomb");
-      console.log(allSquares[i].classList)
-    }
-  }
 
+  start();
   // for( let i =0; i < allSquares.length; i++){
   //   allSquares.removeChild(squareVars[i].lastElementChild)
   // }
