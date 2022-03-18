@@ -12,6 +12,8 @@ background-color: rgb(255, 255, 255);
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
   border: 2px solid black;
   margin: 0 auto;
+  border-radius: 5px;
+  
 }
 .square{
     border: 2px solid black;
@@ -52,10 +54,12 @@ h1{
 .square{
 display:flex;
 justify-content: center;
+border-radius: 5px;
 }
 
-.square-container div{
-    border-radius: 20px;
+.square-container{
+    border-radius: 5px;
+    display:none;
   }
 
 .bomb{

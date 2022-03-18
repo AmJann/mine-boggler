@@ -37,6 +37,7 @@ character-end, block, bomb, star, and question mark.
 //                 [3,0][3,1][3,2][3,3][3,4]
 //                 [4,0][4,1][4,2][4,3][4,4]
 // ]
+let finalScore = 0;
 let score = 0;
 let charPos = 0;
 let boardArr = [];
@@ -151,6 +152,10 @@ function start() {
   bomb.src = "boom.png";
   let bomb2 = document.createElement("img");
   bomb2.src = "boom2.png";
+  let bomb3 = document.createElement("img");
+  bomb3.src = "boom3.png";
+  let bomb4 = document.createElement("img");
+  bomb4.src = "boom4.png";
   let questionMark = document.createElement("img");
   questionMark.src = "questionMark.png";
   let questionMark2 = document.createElement("img");
@@ -173,6 +178,7 @@ function start() {
   console.log(blockShuffle);
   let blockPos = document.querySelector(blockShuffle[0]);
   blockPos.appendChild(block);
+  blockPos.classList.add("block");
   allDivs = allDivs.filter(
     (div) =>
       div !== blockShuffle[0] &&
@@ -180,7 +186,7 @@ function start() {
       div !== blockShuffle[2] &&
       div !== blockShuffle[3]
   );
-  blockPos.classList.add("block");
+  
 
   let blockPos2 = document.querySelector(blockShuffle[1]);
   blockPos2.appendChild(block2);
@@ -193,6 +199,7 @@ function start() {
   let blockPos4 = document.querySelector(blockShuffle[3]);
   blockPos4.appendChild(block4);
   blockPos4.classList.add("block");
+
   console.log(blockPos4);
   console.log(blockShuffle[3]);
   console.log(allDivs);
@@ -208,20 +215,26 @@ function start() {
   let bombPos2 = document.querySelector(shuffled[1]);
   bombPos2.appendChild(bomb2);
   bombPos2.classList.add("bomb");
+  let bombPos3 = document.querySelector(shuffled[2]);
+  bombPos3.appendChild(bomb3);
+  bombPos3.classList.add("bomb");
+  let bombPos4 = document.querySelector(shuffled[3]);
+  bombPos4.appendChild(bomb4);
+  bombPos4.classList.add("bomb");
 
   //add question marks
-  let questionMarkPos = document.querySelector(shuffled[2]);
+  let questionMarkPos = document.querySelector(shuffled[4]);
   questionMarkPos.appendChild(questionMark);
   questionMarkPos.classList.add("questionMark");
-  let questionMarkPos2 = document.querySelector(shuffled[3]);
+  let questionMarkPos2 = document.querySelector(shuffled[5]);
   questionMarkPos2.appendChild(questionMark2);
   questionMarkPos2.classList.add("questionMark");
 
   //add stars
-  let starPos = document.querySelector(shuffled[4]);
+  let starPos = document.querySelector(shuffled[6]);
   starPos.appendChild(star);
   starPos.classList.add("star");
-  let starPos2 = document.querySelector(shuffled[5]);
+  let starPos2 = document.querySelector(shuffled[7]);
   starPos2.appendChild(star2);
   starPos2.classList.add("star");
 }
@@ -230,30 +243,50 @@ start();
 let scoreBoard = document.querySelector("#scoreBoard");
 let questionMarkScore = [
   {
-    scoreChange: -500,
+    scoreChange:-500,
     message:
       "You tripped and scraped your knee moving between squares you lose 500 points.",
   },
-  { scoreChange: 1000, message: "You found 1000 points on the ground!" },
+  { scoreChange:1000, message: "You found 1000 points on the ground! " },
   {
-    scoreChange: -1000,
-    message: "dog bites your score, takes a whopping chunk of 1000 points.",
+    scoreChange:-1000,
+    message: "A dog bites your score, takes a whopping chunk of 1000 points.",
   },
   {
-    scoreChange: 500,
+    scoreChange:500,
     message:
       "You give an old lady directions to the last square, she rewards you with 500 points for your kindness!",
   },
   {
-    scoreChange: 200,
+    scoreChange:200,
     message:
       "You were too busy clicking squares and forgot to buy lunch, oops! Money saved is money earned, you gained 200 points.",
   },
   {
-    scoreChange: 200,
+    scoreChange:-200,
     message:
       "You were caught speeding through squares, cop pulls you over and gives you a 200 point ticket. you lose 200 points.",
   },
+  {
+    scoreChange:2000,
+    message:
+      "You made it big as a square tour guide, you collect 2000 points for new business. Your knowledge has finally paid off!",
+  },
+  {
+    scoreChange:-2000,
+    message:
+      "You donated 2000 points to the charity pigs without wings, your points will help a poor wingless pig fly!",
+  },
+  // {
+  //   scoreChange: score += score,
+  //   message:
+  //     "You went to a casino after reading a fortune cookie that said you would have very goodluck, the cookie was right! You doubled your money playing roulette. Thanks cookie!",
+  // },
+  // {
+  //   scoreChange: 0,
+  //   message:
+  //     "You were found guilty of a pen smuggling operation, the government seizes all of your points. Moral of the story... don't take other peoples pens.",
+  // },
 ];
 
 let char = document.createElement("img");
@@ -283,13 +316,17 @@ function changeImg(element) {
   if (element.classList.contains("bomb")) {
     score -= 500;
     scoreBoard.innerHTML = `Score: ${score}`;
-  } else if (element.classList.contains("questionMark")) {
+  } 
+  else if (element.classList.contains("star")) {
+    score += 500;
+    scoreBoard.innerHTML = `Score: ${score}`
+  } 
+  else if (element.classList.contains("questionMark")) {
     let randomQuestionIndex = shuffle(questionMarkScore);
     score = score + randomQuestionIndex[0].scoreChange;
+    
     alert(randomQuestionIndex[0].message);
     scoreBoard.innerHTML = `Score: ${score}`;
-  } else if (element.classList.contains("star")) {
-    score += 500;
   } else {
     score += 200;
     scoreBoard.innerHTML = `Score: ${score}`;
@@ -377,8 +414,12 @@ squareSix.addEventListener("click", function () {
 let executed7 = false;
 let squareSeven = document.querySelector("#seven");
 squareSeven.addEventListener("click", function () {
-  if (
-    (!executed7 && !this.classList.contains("block") && currentSpace === 1) ||
+  if( this.classList.contains("block")){
+     
+  }
+  
+  else if (
+    (!executed7 && currentSpace === 1) ||
     currentSpace === 2 ||
     currentSpace === 3 ||
     currentSpace === 6 ||
@@ -396,8 +437,12 @@ squareSeven.addEventListener("click", function () {
 let executed8 = false;
 let squareEight = document.querySelector("#eight");
 squareEight.addEventListener("click", function () {
-  if (
-    (!executed8 && !this.classList.contains("block") && currentSpace === 2) ||
+  if( this.classList.contains("block")){
+     
+  }
+ 
+  else if (
+    (!executed8 && currentSpace === 2) ||
     currentSpace === 3 ||
     currentSpace === 4 ||
     currentSpace === 7 ||
@@ -415,8 +460,12 @@ squareEight.addEventListener("click", function () {
 let executed9 = false;
 let squareNine = document.querySelector("#nine");
 squareNine.addEventListener("click", function () {
-  if (
-    (!executed9 && !this.classList.contains("block") && currentSpace === 3) ||
+ if( this.classList.contains("block")){
+     
+ }
+  
+  else if (
+    (!executed9 && currentSpace === 3) ||
     currentSpace === 4 ||
     currentSpace === 5 ||
     currentSpace === 8 ||
@@ -467,8 +516,12 @@ squareEleven.addEventListener("click", function () {
 let executed12 = false;
 let squareTwelve = document.querySelector("#twelve");
 squareTwelve.addEventListener("click", function () {
-  if (
-    (!executed12 && !this.classList.contains("block") && currentSpace === 6) ||
+  if( this.classList.contains("block")){
+     
+  }
+  
+  else if (
+    (!executed12 && currentSpace === 6) ||
     currentSpace === 7 ||
     currentSpace === 8 ||
     currentSpace === 11 ||
@@ -487,8 +540,12 @@ squareTwelve.addEventListener("click", function () {
 let executed13 = false;
 let squareThirteen = document.querySelector("#thirteen");
 squareThirteen.addEventListener("click", function () {
-  if (
-    (!executed13 && !this.classList.contains("block") && currentSpace === 7) ||
+  if( this.classList.contains("block")){
+     
+  }
+  
+  else if (
+    (!executed13 && currentSpace === 7) ||
     currentSpace === 8 ||
     currentSpace === 9 ||
     currentSpace === 12 ||
@@ -507,8 +564,12 @@ squareThirteen.addEventListener("click", function () {
 let executed14 = false;
 let squareFourteen = document.querySelector("#fourteen");
 squareFourteen.addEventListener("click", function () {
-  if (
-    (!executed14 && !this.classList.contains("block") && currentSpace === 14) ||
+  if( this.classList.contains("block")){
+     
+  }
+  
+  else if (
+    (!executed14 && currentSpace === 8) ||
     currentSpace === 9 ||
     currentSpace === 10 ||
     currentSpace === 13 ||
@@ -562,8 +623,12 @@ squareSixteen.addEventListener("click", function () {
 let executed17 = false;
 let squareSeventeen = document.querySelector("#seventeen");
 squareSeventeen.addEventListener("click", function () {
-  if (
-    (!executed17 && !this.classList.contains("block") && currentSpace === 11) ||
+  if( this.classList.contains("block")){
+     
+  }
+  
+  else if (
+    (!executed17 && currentSpace === 11) ||
     currentSpace === 12 ||
     currentSpace === 13 ||
     currentSpace === 16 ||
@@ -582,8 +647,12 @@ squareSeventeen.addEventListener("click", function () {
 let executed18 = false;
 let squareEighteen = document.querySelector("#eighteen");
 squareEighteen.addEventListener("click", function () {
-  if (
-    (!executed18 && !this.classList.contains("block") && currentSpace === 12) ||
+  if( this.classList.contains("block")){
+     
+  }
+  
+  else if (
+    (!executed18 && currentSpace === 12) ||
     currentSpace === 13 ||
     currentSpace === 14 ||
     currentSpace === 17 ||
@@ -602,8 +671,12 @@ squareEighteen.addEventListener("click", function () {
 let executed19 = false;
 let squareNineteen = document.querySelector("#nineteen");
 squareNineteen.addEventListener("click", function () {
-  if (
-    (!executed19 && !this.classList.contains("block") && currentSpace === 13) ||
+  if( this.classList.contains("block")){
+     
+  }
+
+  else if (
+    (!executed19 && currentSpace === 13) ||
     currentSpace === 14 ||
     currentSpace === 15 ||
     currentSpace === 18 ||
@@ -712,6 +785,19 @@ squareTwentyFive.addEventListener("click", function () {
     currentSpace = 25;
     changeImg(this);
     console.log(previousCharArr);
+    
+    localStorage.setItem("highscore",0);
+    let highscore = 0;
+    let highScoreView = document.querySelector('#highscore')
+    let storagedHighScore = +localStorage.getItem("highscore");
+    
+    alert(`You've reached the end!`)
+    if (storagedHighScore  || score > parseInt(storagedHighScore)) {
+      highscore = parseInt(storagedHighScore)
+      localStorage.setItem("highscore", score);
+      highScoreView.innerText = `Highscore: ${score}`
+    }
+    console.log(storagedHighScore)
   }
 });
 
