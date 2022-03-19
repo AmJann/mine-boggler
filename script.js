@@ -1,42 +1,4 @@
-/* 
-[x]add reset button
-[]create .pngs for classes
-  [x]bomb
-  [x]star
-  [x]question mark
-  [x]block
-  []start
-  []end
-  []character
-  []character at start
-  []character at end
-[] create classes with styling for character, character-start, 
-character-end, block, bomb, star, and question mark.
-    []character class 
-    []
-    []character-start
-    []character-end
-    []block
-    []bomb
-    []star
-    []question mark
-[]create logic for movement
-  [] add event listeners to divs 
-  []  query selector all 
-  [x] use a loop within a loop to create 2d array 
-  [] use rows and column logic (take time to figure this out)
-  [] assign 
- []append images to divs
- []
- */
-//writing hardcoding the array I needed helped me figure out how to create using for loops
-//   let boardArrEx=[
-//                 [0,0][0,1][0,2][0,3][0,4]
-//                 [1,0][1,1][1,2][1,3][1,4]
-//                 [2,0][2,1][2,2][2,3][2,4]
-//                 [3,0][3,1][3,2][3,3][3,4]
-//                 [4,0][4,1][4,2][4,3][4,4]
-// ]
+
 let finalScore = 0;
 let score = 0;
 let charPos = 0;
@@ -113,12 +75,8 @@ for (let i = 0; i < 5; i++) {
     boardArr.push([i, j]);
   }
 }
-console.log(boardArr);
-// function moveChar(square){
-//   let char = document.createElement("img")
-//   char.src = "char.png";
-//   square.appendChild(char)
-// }
+
+
 
 let squareOne = document.querySelector("#one");
 function shuffle(array) {
@@ -175,7 +133,7 @@ function start() {
 
   //blocks placement
   let blockShuffle = shuffle(innerDivs);
-  console.log(blockShuffle);
+
   let blockPos = document.querySelector(blockShuffle[0]);
   blockPos.appendChild(block);
   blockPos.classList.add("block");
@@ -203,11 +161,11 @@ function start() {
   blockPos4.classList.add("block");
   
 
-  console.log(previousCharArr);
+
 
   //shuffle for bombs, stars, and question marks
   let shuffled = shuffle(allDivs);
-  console.log(shuffled);
+
 
   //add bombs
   let bombPos = document.querySelector(shuffled[0]);
@@ -312,7 +270,7 @@ function changeImg(element) {
   previousCharArr.length = 0;
   previousCharArr.push(element);
   allPreviousCharArr.push(element);
-  console.log(previousCharArr);
+
 
   if (element.classList.contains("bomb")) {
     score -= 500;
@@ -346,10 +304,7 @@ squareTwo.addEventListener("click", function () {
     currentSpace = 2;
     executed2 = true;
     changeImg(this);
-    console.log(executed3);
-    console.log(executed6);
-    console.log(executed7);
-    console.log(executed8);
+
   }
   if (
     executed3 === true &&
@@ -374,13 +329,9 @@ squareThree.addEventListener("click", function () {
     executed3 = true;
     currentSpace = 3;
     changeImg(this);
-    console.log(executed3);
+
   }
-  console.log(executed2);
-  console.log(executed9);
-  console.log(executed7);
-  console.log(executed8);
-  console.log(executed4);
+
 
   if (
     executed2 === true &&
@@ -416,7 +367,7 @@ squareFour.addEventListener("click", function () {
   ) {
     alert("Out of Moves, Game Over");
   }
-  console.log(previousCharArr)
+ 
 });
 
 let executed5 = false;
@@ -1035,15 +986,7 @@ if (squareEighteen.classList.contains("block")) {
 if (squareNineteen.classList.contains("block")) {
   executed19 = true;
 }
-console.log(executed7);
-console.log(executed8);
-console.log(executed9);
-console.log(executed12);
-console.log(executed13);
-console.log(executed14);
-console.log(executed17);
-console.log(executed18);
-console.log(executed19);
+
 
 //New Game Button/ Reset Board
 newGameButton.addEventListener("click", function () {
@@ -1079,7 +1022,6 @@ newGameButton.addEventListener("click", function () {
       allSquares[i].classList.remove("char");
       allSquares[i].classList.remove("block");
 
-      console.log(allSquares[i].classList);
     }
   }
   //resets current space and character can now move to all spaces
@@ -1113,7 +1055,7 @@ newGameButton.addEventListener("click", function () {
   executed25 = false;
 highscoreArr = 0;
   start();
-console.log(previousCharArr)
+
 });
 
 //modal (help from modals classwork)
