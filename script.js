@@ -44,6 +44,7 @@ let boardArr = [];
 let currentSpace = 1;
 let previousCharArr = [];
 let allPreviousCharArr = [];
+const allSquares = document.querySelectorAll(".square");
 let allDivs = [
   "#two",
   "#three",
@@ -101,11 +102,11 @@ const squareVars = [
   "squareEighteen",
   "squareNineteen",
   "squareTwenty",
-  // "squareTwenty-one",
-  // "squareTwenty-two",
-  // "squareTwenty-three",
-  // "squareTwenty-four",
-  // "squareTwenty-five",
+  "squareTwenty-one",
+  "squareTwenty-two",
+  "squareTwenty-three",
+  "squareTwenty-four",
+  "squareTwenty-five",
 ];
 for (let i = 0; i < 5; i++) {
   for (let j = 0; j < 5; j++) {
@@ -119,7 +120,6 @@ console.log(boardArr);
 //   square.appendChild(char)
 // }
 
-const allSquares = document.querySelectorAll(".square");
 let squareOne = document.querySelector("#one");
 function shuffle(array) {
   var i = array.length,
@@ -179,6 +179,7 @@ function start() {
   let blockPos = document.querySelector(blockShuffle[0]);
   blockPos.appendChild(block);
   blockPos.classList.add("block");
+  
   allDivs = allDivs.filter(
     (div) =>
       div !== blockShuffle[0] &&
@@ -186,23 +187,23 @@ function start() {
       div !== blockShuffle[2] &&
       div !== blockShuffle[3]
   );
-  
 
   let blockPos2 = document.querySelector(blockShuffle[1]);
   blockPos2.appendChild(block2);
   blockPos2.classList.add("block");
+  
 
   let blockPos3 = document.querySelector(blockShuffle[2]);
   blockPos3.appendChild(block3);
   blockPos3.classList.add("block");
+  
 
   let blockPos4 = document.querySelector(blockShuffle[3]);
   blockPos4.appendChild(block4);
   blockPos4.classList.add("block");
+  
 
-  console.log(blockPos4);
-  console.log(blockShuffle[3]);
-  console.log(allDivs);
+  console.log(previousCharArr);
 
   //shuffle for bombs, stars, and question marks
   let shuffled = shuffle(allDivs);
@@ -243,37 +244,37 @@ start();
 let scoreBoard = document.querySelector("#scoreBoard");
 let questionMarkScore = [
   {
-    scoreChange:-500,
+    scoreChange: -500,
     message:
       "You tripped and scraped your knee moving between squares you lose 500 points.",
   },
-  { scoreChange:1000, message: "You found 1000 points on the ground! " },
+  { scoreChange: 1000, message: "You found 1000 points on the ground! " },
   {
-    scoreChange:-1000,
+    scoreChange: -1000,
     message: "A dog bites your score, takes a whopping chunk of 1000 points.",
   },
   {
-    scoreChange:500,
+    scoreChange: 500,
     message:
       "You give an old lady directions to the last square, she rewards you with 500 points for your kindness!",
   },
   {
-    scoreChange:200,
+    scoreChange: 200,
     message:
       "You were too busy clicking squares and forgot to buy lunch, oops! Money saved is money earned, you gained 200 points.",
   },
   {
-    scoreChange:-200,
+    scoreChange: -200,
     message:
       "You were caught speeding through squares, cop pulls you over and gives you a 200 point ticket. you lose 200 points.",
   },
   {
-    scoreChange:2000,
+    scoreChange: 2000,
     message:
       "You made it big as a square tour guide, you collect 2000 points for new business. Your knowledge has finally paid off!",
   },
   {
-    scoreChange:-2000,
+    scoreChange: -2000,
     message:
       "You donated 2000 points to the charity pigs without wings, your points will help a poor wingless pig fly!",
   },
@@ -316,15 +317,13 @@ function changeImg(element) {
   if (element.classList.contains("bomb")) {
     score -= 500;
     scoreBoard.innerHTML = `Score: ${score}`;
-  } 
-  else if (element.classList.contains("star")) {
+  } else if (element.classList.contains("star")) {
     score += 500;
-    scoreBoard.innerHTML = `Score: ${score}`
-  } 
-  else if (element.classList.contains("questionMark")) {
+    scoreBoard.innerHTML = `Score: ${score}`;
+  } else if (element.classList.contains("questionMark")) {
     let randomQuestionIndex = shuffle(questionMarkScore);
     score = score + randomQuestionIndex[0].scoreChange;
-    
+
     alert(randomQuestionIndex[0].message);
     scoreBoard.innerHTML = `Score: ${score}`;
   } else {
@@ -346,6 +345,18 @@ squareTwo.addEventListener("click", function () {
     currentSpace = 2;
     executed2 = true;
     changeImg(this);
+    console.log(executed3);
+    console.log(executed6);
+    console.log(executed7);
+    console.log(executed8);
+  }
+  if (
+    executed3 === true &&
+    executed6 === true &&
+    executed7 === true &&
+    executed8 === true
+  ) {
+    alert("Out of Moves, Game Over");
   }
 });
 
@@ -362,6 +373,22 @@ squareThree.addEventListener("click", function () {
     executed3 = true;
     currentSpace = 3;
     changeImg(this);
+    console.log(executed3);
+  }
+  console.log(executed2);
+  console.log(executed9);
+  console.log(executed7);
+  console.log(executed8);
+  console.log(executed4);
+
+  if (
+    executed2 === true &&
+    executed4 === true &&
+    executed9 === true &&
+    executed7 === true &&
+    executed8 === true
+  ) {
+    alert("Out of Moves, Game Over");
   }
 });
 
@@ -379,6 +406,16 @@ squareFour.addEventListener("click", function () {
     currentSpace = 4;
     changeImg(this);
   }
+  if (
+    executed3 === true &&
+    executed5 === true &&
+    executed8 === true &&
+    executed9 === true &&
+    executed10 === true
+  ) {
+    alert("Out of Moves, Game Over");
+  }
+  console.log(previousCharArr)
 });
 
 let executed5 = false;
@@ -392,6 +429,9 @@ squareFive.addEventListener("click", function () {
     executed5 = true;
     currentSpace = 5;
     changeImg(this);
+  }
+  if (executed4 === true && executed9 === true && executed10 === true) {
+    alert("Out of Moves, Game Over");
   }
 });
 
@@ -409,16 +449,22 @@ squareSix.addEventListener("click", function () {
     currentSpace = 6;
     changeImg(this);
   }
+  if (
+    executed2 === true &&
+    executed7 === true &&
+    executed11 === true &&
+    executed12 === true
+  ) {
+    alert("Out of Moves, Game Over");
+  }
 });
 
 let executed7 = false;
 let squareSeven = document.querySelector("#seven");
 squareSeven.addEventListener("click", function () {
-  if( this.classList.contains("block")){
-     
-  }
-  
-  else if (
+  if (this.classList.contains("block")) {
+    executed7 === true;
+  } else if (
     (!executed7 && currentSpace === 1) ||
     currentSpace === 2 ||
     currentSpace === 3 ||
@@ -432,16 +478,25 @@ squareSeven.addEventListener("click", function () {
     currentSpace = 7;
     changeImg(this);
   }
+  if (
+    executed2 === true &&
+    executed3 === true &&
+    executed6 === true &&
+    executed8 === true &&
+    executed11 === true &&
+    executed12 === true &&
+    executed13 === true
+  ) {
+    alert("Out of Moves, Game Over");
+  }
 });
 
 let executed8 = false;
 let squareEight = document.querySelector("#eight");
 squareEight.addEventListener("click", function () {
-  if( this.classList.contains("block")){
-     
-  }
- 
-  else if (
+  if (this.classList.contains("block")) {
+    executed8 === true;
+  } else if (
     (!executed8 && currentSpace === 2) ||
     currentSpace === 3 ||
     currentSpace === 4 ||
@@ -455,16 +510,26 @@ squareEight.addEventListener("click", function () {
     currentSpace = 8;
     changeImg(this);
   }
+  if (
+    executed2 === true &&
+    executed3 === true &&
+    executed4 === true &&
+    executed7 === true &&
+    executed9 === true &&
+    executed12 === true &&
+    executed13 === true &&
+    executed14 === true
+  ) {
+    alert("Out of Moves, Game Over");
+  }
 });
 
 let executed9 = false;
 let squareNine = document.querySelector("#nine");
 squareNine.addEventListener("click", function () {
- if( this.classList.contains("block")){
-     
- }
-  
-  else if (
+  if (this.classList.contains("block")) {
+    executed9 = true;
+  } else if (
     (!executed9 && currentSpace === 3) ||
     currentSpace === 4 ||
     currentSpace === 5 ||
@@ -477,6 +542,18 @@ squareNine.addEventListener("click", function () {
     executed9 = true;
     currentSpace = 9;
     changeImg(this);
+  }
+  if (
+    executed3 === true &&
+    executed4 === true &&
+    executed5 === true &&
+    executed8 === true &&
+    executed10 === true &&
+    executed13 === true &&
+    executed14 === true &&
+    executed15 === true
+  ) {
+    alert("Out of Moves, Game Over");
   }
 });
 
@@ -493,6 +570,15 @@ squareTen.addEventListener("click", function () {
     executed10 = true;
     currentSpace = 10;
     changeImg(this);
+  }
+  if (
+    executed4 === true &&
+    executed5 === true &&
+    executed9 === true &&
+    executed14 === true &&
+    executed15 === true
+  ) {
+    alert("Out of Moves, Game Over");
   }
 });
 
@@ -511,16 +597,23 @@ squareEleven.addEventListener("click", function () {
 
     changeImg(this);
   }
+  if (
+    executed6 === true &&
+    executed7 === true &&
+    executed12 === true &&
+    executed16 === true &&
+    executed17 === true
+  ) {
+    alert("Out of Moves, Game Over");
+  }
 });
 // square 12
 let executed12 = false;
 let squareTwelve = document.querySelector("#twelve");
 squareTwelve.addEventListener("click", function () {
-  if( this.classList.contains("block")){
-     
-  }
-  
-  else if (
+  if (this.classList.contains("block")) {
+    executed12 = true;
+  } else if (
     (!executed12 && currentSpace === 6) ||
     currentSpace === 7 ||
     currentSpace === 8 ||
@@ -534,17 +627,27 @@ squareTwelve.addEventListener("click", function () {
     currentSpace = 12;
     changeImg(this);
   }
+  if (
+    executed6 === true &&
+    executed7 === true &&
+    executed8 === true &&
+    executed11 === true &&
+    executed13 === true &&
+    executed16 === true &&
+    executed17 === true &&
+    executed18 === true
+  ) {
+    alert("Out of Moves, Game Over");
+  }
 });
 
 //square 13
 let executed13 = false;
 let squareThirteen = document.querySelector("#thirteen");
 squareThirteen.addEventListener("click", function () {
-  if( this.classList.contains("block")){
-     
-  }
-  
-  else if (
+  if (this.classList.contains("block")) {
+    executed13 = true;
+  } else if (
     (!executed13 && currentSpace === 7) ||
     currentSpace === 8 ||
     currentSpace === 9 ||
@@ -558,17 +661,27 @@ squareThirteen.addEventListener("click", function () {
     currentSpace = 13;
     changeImg(this);
   }
+  if (
+    executed7 === true &&
+    executed8 === true &&
+    executed9 === true &&
+    executed12 === true &&
+    executed14 === true &&
+    executed17 === true &&
+    executed18 === true &&
+    executed19 === true
+  ) {
+    alert("Out of Moves, Game Over");
+  }
 });
 
 //Square 14
 let executed14 = false;
 let squareFourteen = document.querySelector("#fourteen");
 squareFourteen.addEventListener("click", function () {
-  if( this.classList.contains("block")){
-     
-  }
-  
-  else if (
+  if (this.classList.contains("block")) {
+    executed14 = true;
+  } else if (
     (!executed14 && currentSpace === 8) ||
     currentSpace === 9 ||
     currentSpace === 10 ||
@@ -581,6 +694,18 @@ squareFourteen.addEventListener("click", function () {
     executed14 = true;
     currentSpace = 14;
     changeImg(this);
+  }
+  if (
+    executed8 === true &&
+    executed9 === true &&
+    executed10 === true &&
+    executed13 === true &&
+    executed15 === true &&
+    executed18 === true &&
+    executed19 === true &&
+    executed20 === true
+  ) {
+    alert("Out of Moves, Game Over");
   }
 });
 
@@ -599,7 +724,15 @@ squareFifteen.addEventListener("click", function () {
     currentSpace = 15;
     changeImg(this);
   }
-  console.log("click");
+  if (
+    executed9 === true &&
+    executed10 === true &&
+    executed14 === true &&
+    executed19 === true &&
+    executed20 === true
+  ) {
+    alert("Out of Moves, Game Over");
+  }
 });
 
 //Square 16
@@ -613,9 +746,18 @@ squareSixteen.addEventListener("click", function () {
     currentSpace === 21 ||
     currentSpace === 22
   ) {
+    changeImg(this);
     executed16 = true;
     currentSpace = 16;
-    changeImg(this);
+  }
+  if (
+    executed11 === true &&
+    executed12 === true &&
+    executed17 === true &&
+    executed21 === true &&
+    executed22 === true
+  ) {
+    alert("Out of Moves, Game Over");
   }
 });
 
@@ -623,11 +765,9 @@ squareSixteen.addEventListener("click", function () {
 let executed17 = false;
 let squareSeventeen = document.querySelector("#seventeen");
 squareSeventeen.addEventListener("click", function () {
-  if( this.classList.contains("block")){
-     
-  }
-  
-  else if (
+  if (this.classList.contains("block")) {
+    executed17 = true;
+  } else if (
     (!executed17 && currentSpace === 11) ||
     currentSpace === 12 ||
     currentSpace === 13 ||
@@ -641,17 +781,27 @@ squareSeventeen.addEventListener("click", function () {
     currentSpace = 17;
     changeImg(this);
   }
+  if (
+    executed11 === true &&
+    executed12 === true &&
+    executed13 === true &&
+    executed16 === true &&
+    executed18 === true &&
+    executed21 === true &&
+    executed22 === true &&
+    executed23 === true
+  ) {
+    alert("Out of Moves, Game Over");
+  }
 });
 
 //Square 18
 let executed18 = false;
 let squareEighteen = document.querySelector("#eighteen");
 squareEighteen.addEventListener("click", function () {
-  if( this.classList.contains("block")){
-     
-  }
-  
-  else if (
+  if (this.classList.contains("block")) {
+    executed18 = true;
+  } else if (
     (!executed18 && currentSpace === 12) ||
     currentSpace === 13 ||
     currentSpace === 14 ||
@@ -665,17 +815,27 @@ squareEighteen.addEventListener("click", function () {
     currentSpace = 18;
     changeImg(this);
   }
+  if (
+    executed12 === true &&
+    executed13 === true &&
+    executed14 === true &&
+    executed17 === true &&
+    executed19 === true &&
+    executed22 === true &&
+    executed23 === true &&
+    executed24 === true
+  ) {
+    alert("Out of Moves, Game Over");
+  }
 });
 
 //Square 19
 let executed19 = false;
 let squareNineteen = document.querySelector("#nineteen");
 squareNineteen.addEventListener("click", function () {
-  if( this.classList.contains("block")){
-     
-  }
-
-  else if (
+  if (this.classList.contains("block")) {
+    executed19 = true;
+  } else if (
     (!executed19 && currentSpace === 13) ||
     currentSpace === 14 ||
     currentSpace === 15 ||
@@ -688,7 +848,17 @@ squareNineteen.addEventListener("click", function () {
     currentSpace = 19;
     changeImg(this);
   }
-  console.log("click");
+  if (
+    executed13 === true &&
+    executed14 === true &&
+    executed15 === true &&
+    executed18 === true &&
+    executed20 === true &&
+    executed23 === true &&
+    executed24 === true
+  ) {
+    alert("Out of Moves, Game Over");
+  }
 });
 
 //Square 20
@@ -705,6 +875,14 @@ squareTwenty.addEventListener("click", function () {
     currentSpace = 20;
     changeImg(this);
   }
+  if (
+    executed14 === true &&
+    executed15 === true &&
+    executed19 === true &&
+    executed24 === true
+  ) {
+    alert("Out of Moves, Game Over");
+  }
 });
 
 //Square 21
@@ -719,6 +897,9 @@ squareTwentyOne.addEventListener("click", function () {
     executed21 = true;
     currentSpace = 21;
     changeImg(this);
+  }
+  if (executed16 === true && executed17 === true && executed22 === true) {
+    alert("Out of Moves, Game Over");
   }
 });
 
@@ -737,6 +918,15 @@ squareTwentyTwo.addEventListener("click", function () {
     currentSpace = 22;
     changeImg(this);
   }
+  if (
+    executed16 === true &&
+    executed17 === true &&
+    executed18 === true &&
+    executed21 === true &&
+    executed23 === true
+  ) {
+    alert("Out of Moves, Game Over");
+  }
 });
 
 //Square 23
@@ -754,6 +944,15 @@ squareTwentyThree.addEventListener("click", function () {
     currentSpace = 23;
     changeImg(this);
   }
+  if (
+    executed17 === true &&
+    executed18 === true &&
+    executed19 === true &&
+    executed22 === true &&
+    executed24 === true
+  ) {
+    alert("Out of Moves, Game Over");
+  }
 });
 
 //Square 24
@@ -770,6 +969,14 @@ squareTwentyFour.addEventListener("click", function () {
     currentSpace = 24;
     changeImg(this);
   }
+  if (
+    executed18 === true &&
+    executed19 === true &&
+    executed20 === true &&
+    executed23 === true
+  ) {
+    alert("Out of Moves, Game Over");
+  }
 });
 
 //Square 25
@@ -784,48 +991,86 @@ squareTwentyFive.addEventListener("click", function () {
     executed25 = true;
     currentSpace = 25;
     changeImg(this);
-    console.log(previousCharArr);
+  let highscoreArr = [] 
+let highscore = -10000;
+  let highscoreQuery = document.querySelector("#highscore")
+   if(score > highscore){
+      highscoreArr.push(score)
+     highscore = highscoreArr[0]
+     highscoreQuery.innerText = `Highscore: ${highscore}`;
     
-    localStorage.setItem("highscore",0);
-    let highscore = 0;
-    let highScoreView = document.querySelector('#highscore')
-    let storagedHighScore = +localStorage.getItem("highscore");
-    
-    alert(`You've reached the end!`)
-    if (storagedHighScore  || score > parseInt(storagedHighScore)) {
-      highscore = parseInt(storagedHighScore)
-      localStorage.setItem("highscore", score);
-      highScoreView.innerText = `Highscore: ${score}`
-    }
-    console.log(storagedHighScore)
+
+
+   }
+
+    alert(`You've reached the end!`);
+  
   }
 });
+if (squareSeven.classList.contains("block")) {
+  executed7 = true;
+}
+if (squareEight.classList.contains("block")) {
+  executed8 = true;
+}
+if (squareNine.classList.contains("block")) {
+  executed9 = true;
+}
+if (squareTwelve.classList.contains("block")) {
+  executed12 = true;
+}
+if (squareThirteen.classList.contains("block")) {
+  executed13 = true;
+}
+if (squareFourteen.classList.contains("block")) {
+  executed14 = true;
+}
+if (squareSeventeen.classList.contains("block")) {
+  executed17 = true;
+}
+if (squareEighteen.classList.contains("block")) {
+  executed18 = true;
+}
+if (squareNineteen.classList.contains("block")) {
+  executed19 = true;
+}
+console.log(executed7);
+console.log(executed8);
+console.log(executed9);
+console.log(executed12);
+console.log(executed13);
+console.log(executed14);
+console.log(executed17);
+console.log(executed18);
+console.log(executed19);
 
 //New Game Button/ Reset Board
 newGameButton.addEventListener("click", function () {
+  //change squares background color back to white
   for (let i = 0; i < allPreviousCharArr.length; i++) {
     allPreviousCharArr[i].style.backgroundColor = "white";
   }
-  for (let i = 0; i < allPreviousCharArr.length; i++) {
-    if (!squareOne) {
-      allPreviousCharArr[i].removeChild(allPreviousCharArr[i].lastChild);
-    }
+  //resets all sqaures except start and end
+  for (let i = 0; i < allSquares.length; i++) {
+    if (!allSquares[i].classList.contains("startEnd"))
+      allSquares[i].innerHTML = "";
   }
-  previousCharArr[0].removeChild(previousCharArr[0].lastChild);
+// resets start or end if character picture in square
+  if (
+    previousCharArr[0] === squareTwentyFive ||
+    previousCharArr[0] === squareOne
+  )
+    previousCharArr[0].removeChild(previousCharArr[0].lastChild);
 
-  // for(let i = 0; i < allSquares.length; i++){
-  //   if (allSquares[i].classList.contains("bomb")||allSquares[i].classList.contains("star")||allSquares[i].classList.contains("questionMark")){
-  //   allSquares[i].removeChild(allSquares[i].lastChild)
-  //   }
-  // }
 
+//removes class lists for bomb, star, and question mark
   for (let i = 0; i < allSquares.length; i++) {
     if (
       allSquares[i].classList.contains("bomb") ||
       allSquares[i].classList.contains("star") ||
-      allSquares[i].classList.contains(
-        "questionMark" || allSquares[i].classList.contains("char") || allSquares[i].classList.contains("block")
-      )
+      allSquares[i].classList.contains("questionMark") ||
+      allSquares[i].classList.contains("char") ||
+      allSquares[i].classList.contains("block")
     ) {
       allSquares[i].classList.remove("bomb");
       allSquares[i].classList.remove("star");
@@ -836,7 +1081,8 @@ newGameButton.addEventListener("click", function () {
       console.log(allSquares[i].classList);
     }
   }
-
+  //resets current space and character can now move to all spaces
+  currentSpace = 1;
   score = 0;
   scoreBoard.innerHTML = `Score: ${score}`;
 
@@ -864,26 +1110,25 @@ newGameButton.addEventListener("click", function () {
   executed23 = false;
   executed24 = false;
   executed25 = false;
-
-  currentSpace = 1;
-
+highscoreArr = 0;
   start();
-  // for( let i =0; i < allSquares.length; i++){
-  //   allSquares.removeChild(squareVars[i].lastElementChild)
-  // }
-
-  console.log("click");
-  console.log(previousCharArr);
+console.log(previousCharArr)
 });
 
-// let $squares = $('.square')
-// $squares.append('<img src = "block.png">')
+//modal
+const openBtn = document.getElementById("openModal");
+const modal = document.getElementById("modal");
+const close = document.getElementById("close");
 
-//   console.log(boardArr)
-// const allSquares = document.querySelectorAll('.square')
+const openModal = () => {
+  modal.style.display = "block";
+};
+openBtn.addEventListener("click", openModal);
 
-// allSquares.addEventlistener('click',function(){
-//     square.className = "#"
-// })
-// adds or removes the active class
-// cell.classList.toggle("active"); (from stakcoverflow)
+const closeModal = () => {
+  modal.style.display = "none";
+};
+
+close.addEventListener("click", closeModal);
+
+

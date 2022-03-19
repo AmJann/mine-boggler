@@ -2,7 +2,7 @@ header,h1, #new{
     font-family: 'Source Sans Pro', sans-serif;
 }
 body {
-background-color: rgb(255, 255, 255);
+background: #c20808
 }
 .board-container {
   height: 62vh;
@@ -13,6 +13,7 @@ background-color: rgb(255, 255, 255);
   border: 2px solid black;
   margin: 0 auto;
   border-radius: 5px;
+  background-color: white;
   
 }
 .square{
@@ -51,6 +52,15 @@ h1{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
 }
+#openModal{
+background-color: beige;
+border-radius: 15px;
+padding:10px;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 20px;
+display:flex;
+align-items: center;
+}
 .square{
 display:flex;
 justify-content: center;
@@ -65,4 +75,37 @@ border-radius: 5px;
 .bomb{
     background-color: crimson;
   }
+  .block{
+      background-color: grey;
+  }
+
+  #modal{
+	background-color: rgba(0, 0, 0, .4);
+	position:fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 1;
+	overflow:auto;
+    
+
+}
+#modal-textbox{
+	background-color: yellow;
+	height:450px;
+	width: 550px;
+	border-radius: 10px;
+	margin: 150px auto;
+    padding: 10px;
+    border:5px solid black ;
+	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    font-family: 'Source Code Pro', monospace;
+
+}
+p{
+    font-family: 'Source Code Pro', monospace;
+}
+
+
 

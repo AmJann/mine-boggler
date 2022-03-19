@@ -11,22 +11,54 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
    
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+
 </head>
 <body>
  <header>
-  <h1>Mine Boggler</h1>
+  <h1>
+    <img src = "title.png"/>
+  </h1>
     <div id = "score-container">
      <div class = "box score" id = "scoreBoard"><h2>Score</h2></div>
      <div class = "box score" id = "highscore"><h2>Highscore</h2></div>
     </div>
     <div class ="button-container">
       <button id = "new">New Game</button>
+      <button id="openModal">How to Play</button>
+    </div>
+    
+    <div id="modal">
+      <div id="modal-textbox">
+        <a href="#" id="close">close</a>
+
+        <h1>Mine Boggler</h1>
+        <p>
+          Make your way from start to finish with the highest score possible.
+          
+        </p>
+        <p>
+         You will come across different objects here's a list of what they are and what they do.
+        </p>
+        <ul>
+          <li>Bombs: If you click on a space with a bomb you lose 500 points</li>
+          <li>Stars: if you click on a space with a Star you gain 500 points</li>
+          <li>Question Marks: Take your chance it could be mildly good or bad for your score.
+             ALso, it could be greatly bad or good for your score</li>
+          <li>Blocks: You can't move to these spaces they "block" your way!</li>   
+        </ul>
+        <p>
+            Play repeatedly to try and beat the highscore!
+        </p>
+      </div>
     </div>
   </header>   
  <main>
 
   <div class = "board-container">
-    <div class = "box square" id = "one"><h1>Start</h1></div>
+    <div class = "box square startEnd" id = "one"><h1>Start</h1></div>
     <div class = "box square" id = "two"></div>
     <div class = "box square" id = "three"></div>
     <div class = "box square" id = "four"></div>
@@ -50,7 +82,7 @@
     <div class = "box square" id = "twenty-two"></div>
     <div class = "box square" id = "twenty-three"></div>
     <div class = "box square" id = "twenty-four"></div>
-    <div class = "box square" id = "twenty-five"><h1>End</h1></div>
+    <div class = "box square startEnd" id = "twenty-five"><h1>End</h1></div>
  </div>  
  
 </main>
