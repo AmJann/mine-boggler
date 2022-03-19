@@ -288,7 +288,7 @@ function changeImg(element) {
    else {
     score += 200;
     scoreBoard.innerHTML = `Score: ${score}`;
-  }
+}
 }
 
 let executed2 = false;
