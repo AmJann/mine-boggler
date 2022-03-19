@@ -5,8 +5,8 @@ body {
 background: #c20808
 }
 .board-container {
-  height: 62vh;
-  width: 62vw;
+  height: 57vh;
+  width: 57vw;
   display:grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
@@ -23,14 +23,17 @@ background: #c20808
 h1{
     display:flex;
     justify-content:center;
+    padding:0;
 }
 #score-container{
-    padding: 2vh;
+    padding: 0;
     display:grid;
-    grid-template-columns:  45vw 20vw 40vw;
-    grid-template-rows: 10vh 10vh;
+    grid-template-columns:  20vw 55vw 20vw;
+    grid-template-rows: 30vh;
     /* border: 2px solid black;  */
     margin: 0 auto;
+    font-size: 30px;
+    align-items: flex-end;
     
 }
 .score{
@@ -44,6 +47,7 @@ h1{
     justify-content: center;
     align-self: center;
     padding-bottom: 1em;
+    margin:0
 }
 #new{
     background-color: beige;
@@ -75,9 +79,7 @@ border-radius: 5px;
 .bomb{
     background-color: crimson;
   }
-  .block{
-      background-color: grey;
-  }
+
 
   #modal{
 	background-color: rgba(0, 0, 0, .4);
@@ -106,6 +108,7 @@ border-radius: 5px;
 p{
     font-family: 'Source Code Pro', monospace;
 }
+
 
 
 

@@ -1115,7 +1115,7 @@ highscoreArr = 0;
 console.log(previousCharArr)
 });
 
-//modal
+//modal (help from modals classwork)
 const openBtn = document.getElementById("openModal");
 const modal = document.getElementById("modal");
 const close = document.getElementById("close");
@@ -1130,5 +1130,6 @@ const closeModal = () => {
 };
 
 close.addEventListener("click", closeModal);
+
 
 
