@@ -285,7 +285,7 @@ function changeImg(element) {
     alert(randomQuestionIndex[0].message);
     scoreBoard.innerHTML = `Score: ${score}`;
   } 
-   else if(!squareTwentyFive) {
+   else {
     score += 200;
     scoreBoard.innerHTML = `Score: ${score}`;
   }
