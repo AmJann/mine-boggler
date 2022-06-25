@@ -80,6 +80,10 @@ border-radius: 5px;
     background-color: crimson;
   }
 
+  .questionMark{
+      
+  }
+
 
   #modal{
 	background-color: rgba(0, 0, 0, .4);
@@ -110,5 +114,7 @@ p{
 }
 
 
-
+@media {
+    
+}
 

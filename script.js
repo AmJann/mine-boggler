@@ -1,4 +1,3 @@
-
 let finalScore = 0;
 let score = 0;
 let charPos = 0;
@@ -76,8 +75,6 @@ for (let i = 0; i < 5; i++) {
   }
 }
 
-
-
 let squareOne = document.querySelector("#one");
 function shuffle(array) {
   var i = array.length,
@@ -137,7 +134,7 @@ function start() {
   let blockPos = document.querySelector(blockShuffle[0]);
   blockPos.appendChild(block);
   blockPos.classList.add("block");
-  
+
   allDivs = allDivs.filter(
     (div) =>
       div !== blockShuffle[0] &&
@@ -149,23 +146,17 @@ function start() {
   let blockPos2 = document.querySelector(blockShuffle[1]);
   blockPos2.appendChild(block2);
   blockPos2.classList.add("block");
-  
 
   let blockPos3 = document.querySelector(blockShuffle[2]);
   blockPos3.appendChild(block3);
   blockPos3.classList.add("block");
-  
 
   let blockPos4 = document.querySelector(blockShuffle[3]);
   blockPos4.appendChild(block4);
   blockPos4.classList.add("block");
-  
-
-
 
   //shuffle for bombs, stars, and question marks
   let shuffled = shuffle(allDivs);
-
 
   //add bombs
   let bombPos = document.querySelector(shuffled[0]);
@@ -271,7 +262,6 @@ function changeImg(element) {
   previousCharArr.push(element);
   allPreviousCharArr.push(element);
 
-
   if (element.classList.contains("bomb")) {
     score -= 500;
     scoreBoard.innerHTML = `Score: ${score}`;
@@ -284,11 +274,10 @@ function changeImg(element) {
 
     alert(randomQuestionIndex[0].message);
     scoreBoard.innerHTML = `Score: ${score}`;
-  } 
-   else {
+  } else {
     score += 200;
     scoreBoard.innerHTML = `Score: ${score}`;
-}
+  }
 }
 
 let executed2 = false;
@@ -304,7 +293,6 @@ squareTwo.addEventListener("click", function () {
     currentSpace = 2;
     executed2 = true;
     changeImg(this);
-
   }
   if (
     executed3 === true &&
@@ -329,9 +317,7 @@ squareThree.addEventListener("click", function () {
     executed3 = true;
     currentSpace = 3;
     changeImg(this);
-
   }
-
 
   if (
     executed2 === true &&
@@ -367,7 +353,6 @@ squareFour.addEventListener("click", function () {
   ) {
     alert("Out of Moves, Game Over");
   }
- 
 });
 
 let executed5 = false;
@@ -827,14 +812,7 @@ squareTwenty.addEventListener("click", function () {
     currentSpace = 20;
     changeImg(this);
   }
-  if (
-    executed14 === true &&
-    executed15 === true &&
-    executed19 === true &&
-    executed24 === true
-  ) {
-    alert("Out of Moves, Game Over");
-  }
+
 });
 
 //Square 21
@@ -896,15 +874,7 @@ squareTwentyThree.addEventListener("click", function () {
     currentSpace = 23;
     changeImg(this);
   }
-  if (
-    executed17 === true &&
-    executed18 === true &&
-    executed19 === true &&
-    executed22 === true &&
-    executed24 === true
-  ) {
-    alert("Out of Moves, Game Over");
-  }
+
 });
 
 //Square 24
@@ -921,14 +891,7 @@ squareTwentyFour.addEventListener("click", function () {
     currentSpace = 24;
     changeImg(this);
   }
-  if (
-    executed18 === true &&
-    executed19 === true &&
-    executed20 === true &&
-    executed23 === true
-  ) {
-    alert("Out of Moves, Game Over");
-  }
+
 });
 
 //Square 25
@@ -943,20 +906,17 @@ squareTwentyFive.addEventListener("click", function () {
     executed25 = true;
     currentSpace = 25;
     changeImg(this);
-  let highscoreArr = [] 
-let highscore = -10000;
-  let highscoreQuery = document.querySelector("#highscore")
-   if(score > highscore){
-      highscoreArr.push(score)
-     highscore = highscoreArr[0]
-     highscoreQuery.innerText = `Highscore: ${highscore}`;
-    
-
-
-   }
+    let highscoreArr = [0];
+    let highscore = -10000;
+    let highscoreQuery = document.querySelector("#highscore");
+    if (score > highscore) {
+      highscoreArr.unshift(score);
+      highscore = highscoreArr[0];
+      highscoreQuery.innerText = `Highscore: ${highscore}`;
+      console.log(highscoreArr);
+    }
 
     alert(`You've reached the end!`);
-  
   }
 });
 if (squareSeven.classList.contains("block")) {
@@ -987,7 +947,6 @@ if (squareNineteen.classList.contains("block")) {
   executed19 = true;
 }
 
-
 //New Game Button/ Reset Board
 newGameButton.addEventListener("click", function () {
   //change squares background color back to white
@@ -999,15 +958,14 @@ newGameButton.addEventListener("click", function () {
     if (!allSquares[i].classList.contains("startEnd"))
       allSquares[i].innerHTML = "";
   }
-// resets start or end if character picture in square
+  // resets start or end if character picture in square
   if (
     previousCharArr[0] === squareTwentyFive ||
     previousCharArr[0] === squareOne
   )
     previousCharArr[0].removeChild(previousCharArr[0].lastChild);
 
-
-//removes class lists for bomb, star, and question mark
+  //removes class lists for bomb, star, and question mark
   for (let i = 0; i < allSquares.length; i++) {
     if (
       allSquares[i].classList.contains("bomb") ||
@@ -1021,7 +979,6 @@ newGameButton.addEventListener("click", function () {
       allSquares[i].classList.remove("questionMark");
       allSquares[i].classList.remove("char");
       allSquares[i].classList.remove("block");
-
     }
   }
   //resets current space and character can now move to all spaces
@@ -1053,12 +1010,11 @@ newGameButton.addEventListener("click", function () {
   executed23 = false;
   executed24 = false;
   executed25 = false;
-highscoreArr = 0;
+  highscoreArr = 0;
   start();
-
 });
 
-//modal (help from modals classwork)
+// how to play modal
 const openBtn = document.getElementById("openModal");
 const modal = document.getElementById("modal");
 const close = document.getElementById("close");
@@ -1073,6 +1029,3 @@ const closeModal = () => {
 };
 
 close.addEventListener("click", closeModal);
-
-
-
